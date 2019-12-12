@@ -24,12 +24,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/css/sb-admin-2.css",
-              "src/css/sb-admin-2.min.css"
+              "src/styles.css"
             ],
             "scripts": [
-              "src/js/sb-admin-2.js",
-              "src/js/sb-admin-2.min.js"
+             
             ]
           },
           "configurations": {
