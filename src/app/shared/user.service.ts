@@ -40,7 +40,7 @@ export class UserService {
     var body = {
       UserName: this.registerForm.value.UserName,
       Email:this.registerForm.value.Email,
-      Password: this.registerForm.value.Email,
+      Password: this.registerForm.value.Password,
     }
 
     return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
@@ -51,8 +51,7 @@ export class UserService {
   }
 
   getUserProfile() {
-    var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + localStorage.getItem('token')});
-    return this.http.get(this.BaseURI + '/UserProfile',{headers:tokenHeader});
+    return this.http.get(this.BaseURI + '/UserProfile');
   }
 
   roleMatch(allowedRoles): boolean {
