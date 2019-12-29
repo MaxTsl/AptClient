@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit
 
   public onSubmit(form: NgForm)
   {
-    alert('LoginComponent ubmit!! :-) null = ' + form+'\n\n');
     this.service.login(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);

@@ -1,0 +1,88 @@
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr *ngFor="let Organisation of Organisations">
+                      <ng-template [ngTemplateOutlet]="loadTemplate(Organisation)" 
+                        [ngTemplateOutletContext]="{ $implicit: Organisation}">
+                      </ng-template>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+        <!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-Organisation>
+  <td>{{Organisation.orgId}}</td>
+  <td>{{Organisation.orgName}}</td>
+  <td>{{Organisation.orgINN}}</td>
+  <td>{{Organisation.orgAddress}}</td>
+  <td>
+      <input type="button" value="Изменить" class="btn btn-default" (click)="editOrganisation(Organisation)" />
+  </td>
+  <td>
+      <input type="button" value="Удалить"  class="btn btn-danger" (click)="deleteOrganisation(Organisation)"/>
+  </td>
+</ng-template>
+ 
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+  <td>
+    <input type="text" [(ngModel)]="editOrg.orgId" readonly disabled class="form-control" />
+</td>
+  <td>
+      <input type="text" [(ngModel)]="editOrg.orgName" readonly class="form-control" />
+  </td>
+  <td>
+      <input type="text" [(ngModel)]="editOrg.orgINN" class="form-control" />
+  </td>
+  <td>
+      <input type="text" [(ngModel)]="editOrg.orgAddress" class="form-control" />
+  </td>
+  <td>
+      <input type="button" value="Сохранить" (click)="saveOrganisation()" class="btn btn-success" />
+  </td>
+  <td>
+      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>
+     
