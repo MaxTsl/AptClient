@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TemplateRef, ViewChild} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Organisation } from '../../shared/Organisation';
 
 @Component({
   selector: 'app-orgs',
@@ -96,16 +97,9 @@ export class OrgsComponent implements OnInit {
   deleteOrganisation(org: Organisation) {
       this.deleteOrg(org.orgId).subscribe(data => {
           this.statusMessage = 'Данные успешно удалены',
-          this.getOrgs();
+          this.getOrgs(); 
       });
   }
 }
 
-export class Organisation{
-  constructor(
-      public orgId: number,
-      public orgName: string,
-      public orgINN: string,
-      public orgAddress: string)
-      { }
-}
+

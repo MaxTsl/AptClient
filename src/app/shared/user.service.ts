@@ -13,6 +13,8 @@ export class UserService {
   constructor(private fb:FormBuilder, private http:HttpClient) { }
 
     registerForm = this.fb.group({
+      OrgIdForUser :[''],
+      Role :[''],
       UserName :[''/*, [Validators.required]*/],
       Email :[''/* , [Validators.email] */],
       FullName :[''],
@@ -24,20 +26,18 @@ export class UserService {
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
-  /* onSubmit() {
-    this.submitted = true;
-    alert(' UserService onSubmit!! :-)\n\n');
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-        return;
-    } 
+  public getOrgs() {
+    return this.http.get(this.BaseURI+'/Organisation');
+  }
 
-    // display form values on success
-    //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-  }*/
+  public getRoles() {
+    return this.http.get(this.BaseURI+'/Roles');
+  }
 
   register(){
     var body = {
+      OrgId: this.registerForm.value.OrgIdForUser,
+      Role: this.registerForm.value.Role,
       UserName: this.registerForm.value.UserName,
       Email:this.registerForm.value.Email,
       Password: this.registerForm.value.Password,
