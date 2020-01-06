@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-orgs',
   templateUrl: './orgs.component.html',
+  
   styles: []
 })
 export class OrgsComponent implements OnInit {
@@ -44,14 +45,14 @@ export class OrgsComponent implements OnInit {
     return this.http.delete(this.BaseURI + '/' + id);
   }
   
-  // добавление пользователя
+  // добавление организации
   addOrganisation() {
-    this.editOrg = new Organisation(-1,"","","");
+    this.editOrg = new Organisation(0,"","","");
     this.Organisations.push(this.editOrg);
     this.isNewRecord = true;
   }
 
-  // редактирование пользователя
+  // редактирование организации
   editOrganisation(org: Organisation) {
       this.editOrg = new Organisation(org.orgId, org.orgName, org.orgINN,org.orgAddress);
   }
@@ -66,7 +67,7 @@ export class OrgsComponent implements OnInit {
 
   saveOrganisation() {
     if (this.isNewRecord) {
-        // добавляем пользователя
+        // добавляем организации
         this.createOrg(this.editOrg).subscribe(data => {
             this.statusMessage = 'Данные успешно добавлены',
             this.getOrgs();
@@ -74,7 +75,7 @@ export class OrgsComponent implements OnInit {
         this.isNewRecord = false;
         this.editOrg = null;
     } else {
-        // изменяем пользователя
+        // изменяем организацию
         this.updateOrg(this.editOrg.orgId, this.editOrg).subscribe(data => {
             this.statusMessage = 'Данные успешно обновлены',
             this.getOrgs();
@@ -91,7 +92,7 @@ export class OrgsComponent implements OnInit {
       }
       this.editOrg = null;
   }
-  // удаление пользователя
+  // удаление организацию
   deleteOrganisation(org: Organisation) {
       this.deleteOrg(org.orgId).subscribe(data => {
           this.statusMessage = 'Данные успешно удалены',
